@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-declare const Xendit: any
-
 const Checkout = () => {
     const [isXenditLoaded, setXenditLoaded] = useState(false)
 
@@ -50,10 +48,7 @@ const Checkout = () => {
     const [amount, setAmount] = useState('')
 
     // Update state when changing form values.
-    const handleFormChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-        obj: string,
-    ) => {
+    const handleFormChange = (event, obj) => {
         const key = event.target.id
         const value = event.target.value
 
@@ -71,12 +66,12 @@ const Checkout = () => {
     }
 
     // Format card number
-    const formatCardNumber = (cardNumber: string) => {
+    const formatCardNumber = cardNumber => {
         return cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ')
     }
 
     // Pay with card
-    const payWithCard = async (event: React.FormEvent) => {
+    const payWithCard = async event => {
         event.preventDefault()
 
         // Remove the error banner message.
@@ -123,26 +118,7 @@ const Checkout = () => {
     }
 
     // Tokenization callback handler.
-    const tokenizationHandler = (
-        err: {
-            error_code: string
-            message: string
-            errors: []
-        },
-        cardToken: {
-            id: string
-            masked_card_number: string
-            authentication_id: string
-            status: string
-            card_info: {
-                bank: string
-                country: string
-                type: string
-                brand: string
-            }
-            payer_authentication_url: string
-        },
-    ) => {
+    const tokenizationHandler = (err, cardToken) => {
         if (err) {
             console.log('Tokenization Error: ', err)
             setAuthenticating(false)
@@ -167,26 +143,7 @@ const Checkout = () => {
     }
 
     // Authentication callback handler.
-    const authenticationHandler = (
-        err: { error_code: string; message: string },
-        response: {
-            id: string
-            payer_authentication_url: string
-            status: string
-            credit_card_token_id: string
-            masked_card_number: string
-            card_info: {
-                bank: string
-                brand: string
-                card_expiration_month: string
-                card_expiration_year: string
-                country: string
-                fingerprint: string
-                type: string
-            }
-            failure_reason: string
-        },
-    ) => {
+    const authenticationHandler = (err, response) => {
         switch (response.status) {
             case 'VERIFIED':
                 console.log('Verified!!!', response)
@@ -253,9 +210,7 @@ const Checkout = () => {
     }
 
     // Pay with e-Wallet
-    const payWithEwallet = async (
-        event: React.MouseEvent<HTMLButtonElement>,
-    ) => {
+    const payWithEwallet = async event => {
         event.preventDefault()
         await axios
             .post('/pay-via-ewallet', {
@@ -287,8 +242,8 @@ const Checkout = () => {
     }
 
     // Load Xendit.js library for credit/debit card tokenization process.
-    const loadScript = (src: string, id: string): Promise<void> => {
-        return new Promise<void>((resolve, reject) => {
+    const loadScript = (src, id) => {
+        return new Promise((resolve, reject) => {
             if (document.getElementById(id)) {
                 resolve()
                 return
