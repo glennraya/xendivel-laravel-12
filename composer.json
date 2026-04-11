@@ -15,11 +15,15 @@
             "options": {
                 "symlink": true
             }
+        },
+        {
+            "type": "composer",
+            "url": "https://packages.typeset.sh"
         }
     ],
     "require": {
         "php": "^8.2",
-        "glennraya/xendivel": "@dev",
+        "glennraya/xendivel": "dev-dev",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
