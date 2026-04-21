@@ -87,8 +87,15 @@
 
         .invoice-container {
             width: 704px;
+            max-width: 100%;
             margin: 0 auto;
         }
+
+        @if ($page_orientation === 'landscape')
+            .invoice-container {
+                width: 980px;
+            }
+        @endif
 
         .invoice-header {
             background: #f1f3f7;

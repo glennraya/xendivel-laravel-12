@@ -34,6 +34,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Browsershot PDF Configuration
+    |--------------------------------------------------------------------------
+    |
+    | These options control how Browsershot locates Node, npm, Chrome, and
+    | Puppeteer while generating invoice PDFs from HTML templates.
+    |
+    */
+
+    'browsershot' => [
+        'timeout' => 60,
+        'node_binary' => env('XENDIVEL_BROWSERSHOT_NODE_BINARY'),
+        'npm_binary' => env('XENDIVEL_BROWSERSHOT_NPM_BINARY'),
+        'chrome_path' => env('XENDIVEL_BROWSERSHOT_CHROME_PATH'),
+        'node_module_path' => env('XENDIVEL_BROWSERSHOT_NODE_MODULE_PATH'),
+        'include_path' => env('XENDIVEL_BROWSERSHOT_INCLUDE_PATH'),
+        'content_url' => env('XENDIVEL_BROWSERSHOT_CONTENT_URL', env('APP_URL')),
+        'no_sandbox' => env('XENDIVEL_BROWSERSHOT_NO_SANDBOX', false),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Queue Xendivel's Emails
     |--------------------------------------------------------------------------
     |
@@ -43,6 +64,22 @@ return [
     */
 
     'queue_email' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Payment Return URLs
+    |--------------------------------------------------------------------------
+    |
+    | These URLs are where customers return after completing or cancelling an
+    | external payment authorization flow. Leave them null to use Xendivel's
+    | built-in package return pages, or set them to your own app routes.
+    |
+    */
+
+    'redirects' => [
+        'success_url' => env('XENDIVEL_SUCCESS_REDIRECT_URL'),
+        'failure_url' => env('XENDIVEL_FAILURE_REDIRECT_URL'),
+    ],
 
     /*
     |--------------------------------------------------------------------------
