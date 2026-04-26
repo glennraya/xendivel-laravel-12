@@ -34,11 +34,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Browsershot PDF Configuration
+    | Browsershot PDF Rendering
     |--------------------------------------------------------------------------
     |
-    | These options control how Browsershot locates Node, npm, Chrome, and
-    | Puppeteer while generating invoice PDFs from HTML templates.
+    | These options control the Browsershot runtime used to generate invoice
+    | PDFs from HTML templates. Leave binary path options null to let
+    | Browsershot resolve Node, npm, Puppeteer, and Chrome normally.
     |
     */
 
